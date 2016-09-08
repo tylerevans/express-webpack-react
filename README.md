@@ -1,11 +1,12 @@
-# express-webpack-bootstrap Starter Kit
+# express-webpack-react Starter Kit
 
-Starter Kit for Express Webpack and Bootstrap Application including SCSS.
+Starter Kit for Express Webpack and React SPA including SCSS.
 
   - Express
   - Handlebars
   - Webpack
   - Babel (es6)
+  - React
   - SCSS
   - ESlint using Airbnb Configuration.
   - Asset Fingerprinting

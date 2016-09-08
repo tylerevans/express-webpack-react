@@ -31,6 +31,10 @@ var devFlagPlugin = new webpack.DefinePlugin({
 var SCRIPTS_ROOT = path.resolve(__dirname, "./scripts");
 var STYLES_ROOT = path.resolve(__dirname, "./styles");
 
+var VENDOR_MODULES = [
+	"react"
+];
+
 var MODULES = {
 	site: "./scripts/site"
 };
@@ -38,11 +42,13 @@ var MODULES = {
 const sassLoaders = [
 	"css-loader",
 	"postcss-loader",
-	"sass-loader?indentedSyntax=sass&includePaths[]=" + path.resolve(__dirname, "./style")
+	"sass-loader?indentedSyntax=sass&includePaths[]=" + path.resolve(__dirname, "./style") // eslint-disable-line
 ];
 
 module.exports = {
-	entry: MODULES,
+	entry: _.merge(MODULES, {
+		vendor: VENDOR_MODULES
+	}),
 	output: {
 		path: path.resolve(__dirname, "./public"),
 		filename: "[name].bundle.js",
@@ -82,7 +88,7 @@ module.exports = {
 				exclude: /(node_modules)/,
 				loader: "babel",
 				query: {
-					presets: ["es2015"]
+					presets: ["es2015", "react"]
 				}
 			}
 		]
@@ -106,7 +112,8 @@ module.exports = {
 		new webpack.ProvidePlugin({
 			"window.jQuery": "jquery",
 			$: "jquery",
-			jQuery: "jquery"
+			jQuery: "jquery",
+			React: "react"
 		}),
 		new webpack.DefinePlugin({
 			DEBUG: DEBUG
